@@ -14,15 +14,15 @@ class Game {
     }
 
     async init() {
+        this.ui.updateStatus("Initializing Scene...");
+        
+        // Initialize Scene first so it's ready for peer updates
+        this.scene.init();
+
         this.ui.updateStatus("Connecting to Websim...");
         
         // Initialize networking
         await this.networking.init();
-        
-        this.ui.updateStatus("Connected. Initializing Scene...");
-        
-        // Initialize Scene
-        this.scene.init();
 
         // Start Loop
         requestAnimationFrame(this.animate.bind(this));

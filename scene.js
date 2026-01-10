@@ -75,6 +75,7 @@ export class SceneManager {
     }
 
     updatePeers(presence) {
+        if (!this.scene) return; // Guard against updates before scene is ready
         const myId = this.game.networking.room.clientId;
         const currentIds = Object.keys(presence);
 

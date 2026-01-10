@@ -22,7 +22,7 @@ export class Player {
         
         // Body (Capsule)
         const geometry = new THREE.CapsuleGeometry(0.5, 1, 4, 8);
-        this.material = new THREE.MeshStandardMaterial({ color: data.color || 0xff0000 });
+        this.material = new THREE.MeshStandardMaterial({ color: safeData.color || 0xff0000 });
         this.body = new THREE.Mesh(geometry, this.material);
         this.body.position.y = 1; // Half height + radius
         this.body.castShadow = true;
