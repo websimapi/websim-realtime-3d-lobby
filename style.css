@@ -1,0 +1,173 @@
+:root {
+    --primary: #4a90e2;
+    --bg-overlay: rgba(0, 0, 0, 0.6);
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    background: #111;
+    color: white;
+}
+
+#game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Let clicks pass through to 3D scene */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#top-bar {
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#status {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+#controls-hint {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    margin-top: 20px;
+    text-shadow: 0 1px 2px black;
+}
+
+#action-bar {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    pointer-events: auto; /* Re-enable clicks for buttons */
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+    font-size: 1rem;
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#log-container {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    width: 200px;
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column-reverse;
+    pointer-events: none;
+    text-shadow: 0 1px 2px black;
+}
+
+.log-entry {
+    margin-bottom: 4px;
+    opacity: 0.8;
+}
+
+/* 3D Labels */
+#labels-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.player-label {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 0.2s;
+}
+
+.player-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: #333;
+    object-fit: cover;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.player-name {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.speech-bubble {
+    background: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    position: relative;
+    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 150px;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    margin-left: -4px;
+    border-width: 4px 4px 0;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+@keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
