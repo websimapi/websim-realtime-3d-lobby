@@ -64,13 +64,17 @@ export class GameNetworking {
         const baseName = myInfo.username;
         
         // Find collisions
-        const allPeers = Object.values(this.room.peers);
+        // Get all peer entries and map them to objects containing ID and username
+        const peerList = Object.entries(this.room.peers).map(([id, info]) => ({
+            id,
+            username: info.username
+        }));
         
-        // Sort peers by ID to have deterministic ordering
-        allPeers.sort((a, b) => a.id.localeCompare(b.id));
+        // Sort by ID for deterministic numbering
+        peerList.sort((a, b) => a.id.localeCompare(b.id));
         
         // Filter for my username
-        const nameCollisions = allPeers.filter(p => p.username === baseName);
+        const nameCollisions = peerList.filter(p => p.username === baseName);
         
         if (nameCollisions.length > 1) {
             const myIndex = nameCollisions.findIndex(p => p.id === myId);
