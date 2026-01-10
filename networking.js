@@ -57,6 +57,10 @@ export class GameNetworking {
     setupIdentity() {
         const myId = this.room.clientId;
         const myInfo = this.room.peers[myId];
+        if (!myInfo) {
+            this.myState.displayName = "Joining...";
+            return;
+        }
         const baseName = myInfo.username;
         
         // Find collisions

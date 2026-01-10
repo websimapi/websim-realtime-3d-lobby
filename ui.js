@@ -9,18 +9,21 @@ export class UIManager {
         
         // Buttons
         document.getElementById('btn-poke').onclick = () => {
+            if (!this.game.scene.localPlayer) return;
             this.game.networking.sendWave();
         };
         
         document.getElementById('btn-color').onclick = () => {
+            if (!this.game.scene.localPlayer) return;
             const color = this.game.networking.updateMyColor();
             // Optimistically update local player visual
-            if (this.game.scene.localPlayer) {
+            if (this.game.scene.localPlayer.material) {
                 this.game.scene.localPlayer.material.color.setHex(color);
             }
         };
         
         document.getElementById('btn-spawn').onclick = () => {
+            if (!this.game.scene.localPlayer) return;
             this.game.networking.spawnBox();
         };
     }

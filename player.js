@@ -7,8 +7,11 @@ export class Player {
         this.isLocal = isLocal;
         this.avatarUrl = avatarUrl;
         
+        // Guard against empty/missing data
+        const safeData = data || {};
+        
         // State
-        this.targetPos = new THREE.Vector3(data.x || 0, data.y || 0, data.z || 0);
+        this.targetPos = new THREE.Vector3(safeData.x || 0, safeData.y || 0, safeData.z || 0);
         this.currentPos = this.targetPos.clone();
         this.speed = 5.0;
         this.moving = false;
@@ -34,7 +37,7 @@ export class Player {
         this.mesh.add(face);
         
         // UI Label
-        this.createLabel(data.displayName, avatarUrl);
+        this.createLabel(safeData.displayName || "Connecting...", avatarUrl);
         
         // Initial set
         this.mesh.position.copy(this.currentPos);

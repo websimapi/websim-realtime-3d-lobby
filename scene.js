@@ -88,7 +88,7 @@ export class SceneManager {
 
         // Add/Update
         for (const id of currentIds) {
-            const data = presence[id];
+            const data = presence[id] || {};
             
             // Check if we need to get avatar info from peers object
             const peerInfo = this.game.networking.room.peers[id];
@@ -104,7 +104,9 @@ export class SceneManager {
             }
             
             // Sync data
-            this.players[id].sync(data);
+            if (this.players[id]) {
+                this.players[id].sync(data);
+            }
         }
     }
 
